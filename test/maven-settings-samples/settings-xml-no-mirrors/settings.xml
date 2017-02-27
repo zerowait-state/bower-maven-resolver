@@ -1,0 +1,22 @@
+<settings>
+  <servers>
+    <server>
+      <id>REPO1</id>
+      <username>myuser</username>
+      <password>mypass</password>
+    </server>
+    <server>
+      <id>REPO2</id>
+      <username>myuser2</username>
+      <password>mypass2</password>
+    </server>
+    <server>
+      <id>REPO3</id>
+      <username>myuser3</username>
+      <password>mypass3</password>
+    </server>
+  </servers>
+  <mirrors>
+  </mirrors>
+</settings>
+

@@ -1,0 +1,18 @@
+<settings>
+  <servers>
+    <server>
+      <id>REPO1</id>
+      <username>myuser</username>
+      <password>mypass</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>REPO1</id>
+      <name>Sample Repository</name>
+      <url>http://host:1234/artifactory/repo1</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>
+

@@ -1,0 +1,40 @@
+<settings>
+  <servers>
+    <server>
+      <id>REPO1</id>
+      <username>myuser</username>
+      <password>mypass</password>
+    </server>
+    <server>
+      <id>REPO2</id>
+      <username>myuser2</username>
+      <password>mypass2</password>
+    </server>
+    <server>
+      <id>REPO3</id>
+      <username>myuser3</username>
+      <password>mypass3</password>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>REPO1</id>
+      <name>Sample Repository 1</name>
+      <url>http://host:1234/artifactory/repo1</url>
+      <mirrorOf>*</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>REPO2</id>
+      <name>Sample Repository 2</name>
+      <url>http://host:1234/artifactory/repo2</url>
+      <mirrorOf>2</mirrorOf>
+    </mirror>
+    <mirror>
+      <id>REPO3</id>
+      <name>Sample Repository 3</name>
+      <url>http://host:1234/artifactory/repo3</url>
+      <mirrorOf>3</mirrorOf>
+    </mirror>
+  </mirrors>
+</settings>
+

@@ -1,0 +1,47 @@
+{
+  "name": "bower-maven-resolver",
+  "version": "0.1.0",
+  "description": "Resolves Bower resources from a maven 3 repository; published under the Apache License 2.0",
+  "main": "src/Resolver.js",
+  "scripts": {
+    "test": "npm run jshint && npm run mocha",
+    "jshint": "jshint",
+    "mocha": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerowait-state/bower-maven-resolver.git"
+  },
+  "keywords": [
+    "bower",
+    "resolver",
+    "maven",
+    "artifact",
+    "repository",
+    "Zero Wait-State",
+    "zerowait-state",
+    "ZWS"
+  ],
+  "author": "Dennis Walker <dwalker@zerowait-state.com> (http://zerowait-state.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zerowait-state/bower-maven-resolver/issues"
+  },
+  "homepage": "https://github.com/zerowait-state/bower-maven-resolver#readme",
+  "dependencies": {
+    "file": "^0.2.2",
+    "request": "^2.79.0",
+    "request-promise-native": "^1.0.3",
+    "tar.gz": "^1.0.5",
+    "tmp": "0.0.31",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "finalhandler": "^1.0.0",
+    "http": "0.0.0",
+    "http-auth": "^3.1.1",
+    "jshint": "^2.9.4",
+    "mocha": "^3.2.0",
+    "serve-static": "^1.11.2"
+  }
+}
