@@ -1,0 +1,40 @@
+{
+  "name": "bower-maven-resolver",
+  "description": "vanilla maven (3) repository resolver for bower artifacts",
+  "main": [
+    "src/Maven3Resolver.js"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "bower",
+    "resolver",
+    "maven",
+    "artifact",
+    "repository",
+    "Zero Wait-State",
+    "zerowait-state",
+    "ZWS"
+  ],
+  "authors": [
+    "Dennis Walker <dwalker@zerowait-state.com>"
+  ],
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zerowait-state/bower-maven-resolver.git"
+  },
+  "private": false
+}
+
