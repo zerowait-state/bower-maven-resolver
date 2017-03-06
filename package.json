@@ -1,6 +1,6 @@
 {
   "name": "bower-maven-resolver",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Resolves Bower resources from a maven 3 repository; published under the Apache License 2.0",
   "main": "src/Maven3Resolver.js",
   "scripts": {
