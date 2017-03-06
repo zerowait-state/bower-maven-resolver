@@ -58,7 +58,7 @@ All of the files of your Bower package are archived into a single file, for exam
      -DrepositoryId=MY_REPO
    ```
 
-  Presumably you're using maven and know how to get artifacts into it.  You could use the command line given here, or deploy manually with the web client for your repository.
+  Presumably you're using maven and know how to get artifacts into it.  You could use the command line given here, or deploy manually with the web client for your repository.  For the short term, I use a [quick and dirty shell script](doc/sample-shell-deploy.md) for this.
 
 ## Accessing your Package with Bower
 
