@@ -20,7 +20,7 @@ Published under the Apache License 2.0.
 
 * Add an entry for maven-bower-resolver to your .bowerrc configuration file.
 
-  ```
+  ```json
     {
       "resolvers": [
         "maven-bower-resolver"
@@ -38,7 +38,7 @@ All of the files of your Bower package are archived into a single file, for exam
 
 * Generate package of your project.  Following is an example of creating this file assuming your build process puts files into a dist/ subdirectory in your project.
 
-  ```
+  ```sh
   cp file1 file2 ... dist/  # (i.e. putting the files into 'dist' directory)
   cd dist
   tar cvfz dist.tar.gz .
@@ -46,11 +46,11 @@ All of the files of your Bower package are archived into a single file, for exam
   
   **Note:** it is recommended **NOT** to name your package file 'package.tar.gz' so that, while cleaning up, you do not accidentally delete your package.json file.
   
-  **Note:** you can probably also figure out a nifty way of getting your build process to create the dist.tar.gz file for you that will work across platforms.  The above gives you the idea how it should work.
+  **Note:** you can probably also figure out a nifty way of getting your build process to create the dist.tar.gz file for you that will work across platforms.  The above gives you the idea how it should work.  Here is an [example using Grunt](doc/create-package-with-grunt.md).
 
 * [Deploy](https://maven.apache.org/plugins/maven-deploy-plugin/deploy-file-mojo.html) the archive file into maven repository
 
-  ```
+  ```sh
     mvn deploy:deploy-file \
      -DgroupId=myGroup -DartifactId=myArtifact -Dversion=1.0 \
      -Dfile=dist.tar.gz \
@@ -64,7 +64,7 @@ All of the files of your Bower package are archived into a single file, for exam
 
 Now anywhere you need to build the project, you can do so independently of maven utilities.
 
-``` 
+```sh
 git clone http://github.com/my-kewl-repo.git
 npm install
 bower install
@@ -80,7 +80,7 @@ The main configuration is for the authentication to the maven repository server.
 
 1. First in order or precedence is to use the bower configuration.  Include a **maven** section in your bower configuration:
 
-  ```
+  ```javascript
     {
       config: {
         maven: {
