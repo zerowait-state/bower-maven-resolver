@@ -2,7 +2,7 @@
   "name": "bower-maven-resolver",
   "version": "1.0.2",
   "description": "Resolves Bower resources from a maven 3 repository; published under the Apache License 2.0",
-  "main": "src/Resolver.js",
+  "main": "src/Maven3Resolver.js",
   "scripts": {
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint",
