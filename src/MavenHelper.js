@@ -267,10 +267,10 @@ _private.getM2Dir = function() {
 
 _private.getPackageUrl = function(source, target) {
     var sRequestUrl = _private.getRequestUrl(source);
-    sRequestUrl.replace(/\/+$/, '');
-    target.replace(/^\/+/, '');
-    target.replace(/\/+$/, '');
-    sRequestUrl = sRequestUrl+'/'+target;
+    sRequestUrl = sRequestUrl.replace(/\/+$/, '');
+    var sTarget = target.replace(/^\/+/, '');
+    sTarget = sTarget.replace(/\/+$/, '');
+    sRequestUrl = sRequestUrl+'/'+sTarget;
     var re = /([^\/]+)\/([^\/]+)$/;
     var aRes = re.exec(sRequestUrl);
     if (!aRes) {
