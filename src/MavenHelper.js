@@ -152,7 +152,7 @@ _private.slurpUrlViaPromise = function(sUrl, options) {
  * @return {Promise} returning directory the package was unpacked to
  */
 _private.unpackRemotePackageViaPromise = function(sUrl, options) {
-    var tmpDir = tmp.fileSync().name;
+    var tmpDir = tmp.dirSync().name;
     var promise = new Promise(function(resolve, reject) {
         var readStream = request.get(sUrl, options);
         var writeStream = targz().createWriteStream(tmpDir);
