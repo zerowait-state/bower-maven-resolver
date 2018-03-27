@@ -18,12 +18,12 @@ Published under the Apache License 2.0.
 
   ``` npm install bower-maven-resolver --save-dev ```
 
-* Add an entry for maven-bower-resolver to your .bowerrc configuration file.
+* Add an entry for bower-maven-resolver to your .bowerrc configuration file.
 
   ```json
     {
       "resolvers": [
-        "maven-bower-resolver"
+        "bower-maven-resolver"
       ]
     }
   ```
