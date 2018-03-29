@@ -1,6 +1,6 @@
 {
   "name": "bower-maven-resolver",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Resolves Bower resources from a maven 3 repository; published under the Apache License 2.0",
   "main": "src/Maven3Resolver.js",
   "scripts": {
@@ -32,9 +32,12 @@
     "file": "^0.2.2",
     "request": "^2.79.0",
     "request-promise-native": "^1.0.3",
-    "tar.gz": "^1.0.5",
+    "tar": "^4.4.1",
+    "test": "^0.6.0",
     "tmp": "0.0.31",
-    "xml2js": "^0.4.17"
+    "unzip-stream": "^0.3.0",
+    "xml2js": "^0.4.17",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "finalhandler": "^1.0.0",

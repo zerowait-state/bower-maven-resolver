@@ -73,6 +73,11 @@ describe('Maven3Resolver', function() {
         source: fetchSource1,
         target: '1.0.0'
     };
+    var fetchSource2 = 'http://localhost:9191/maven-package-samples/sample3';
+    var endpoint2 = {
+        source: fetchSource2,
+        target: '1.0.0'
+    };
     var expectedFiles1 = ['file1.1.0.0', 'file2.1.0.0'];
     var source1Conf1 = {
         username : 'user1',
@@ -84,6 +89,10 @@ describe('Maven3Resolver', function() {
     bower1a.config.maven[metadataSource1] = source1Conf1;
     bower1a.config.maven[fetchSource1] = source1Conf1;
     var bower1b = {};
+    bower1b.config = {};
+    bower1b.config.maven = {};
+    bower1b.config.maven[metadataSource1] = source1Conf1;
+    bower1b.config.maven[fetchSource2] = source1Conf1;
 
     describe('-requiring no authentication-', function() {
         var server;
@@ -118,6 +127,18 @@ describe('Maven3Resolver', function() {
             it('should unpack proper files when no authentication is required for '+fetchSource1, function() {
                 resolver = new Maven3Resolver(bower1a);
                 return resolver.fetch(endpoint1, {})
+                    .then(fetchResponse => {
+                        var files = fs.readdirSync(fetchResponse.tempPath);
+                        assert.deepEqual(expectedFiles1, files);
+                    }, error => {
+                        console.log('FAILED: '+error);
+                        assert.fail(error);
+                    });
+                assert.deepEqual(1,1);
+            });
+            it('should unpack proper files when no authentication is required for '+fetchSource2, function() {
+                resolver = new Maven3Resolver(bower1b);
+                return resolver.fetch(endpoint2, {})
                     .then(fetchResponse => {
                         var files = fs.readdirSync(fetchResponse.tempPath);
                         assert.deepEqual(expectedFiles1, files);
@@ -185,6 +206,18 @@ describe('Maven3Resolver', function() {
             it('should unpack proper files when authentication *is* required for '+fetchSource1, function() {
                 resolver = new Maven3Resolver(bower1a);
                 return resolver.fetch(endpoint1, {})
+                    .then(fetchResponse => {
+                        var files = fs.readdirSync(fetchResponse.tempPath);
+                        assert.deepEqual(expectedFiles1, files);
+                    }, error => {
+                        console.log('FAILED: '+error);
+                        assert.fail(error);
+                    });
+                assert.deepEqual(1,1);
+            });
+            it('should unpack proper files when authentication *is* required for '+fetchSource2, function() {
+                resolver = new Maven3Resolver(bower1b);
+                return resolver.fetch(endpoint2, {})
                     .then(fetchResponse => {
                         var files = fs.readdirSync(fetchResponse.tempPath);
                         assert.deepEqual(expectedFiles1, files);

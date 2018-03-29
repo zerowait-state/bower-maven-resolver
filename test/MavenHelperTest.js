@@ -118,7 +118,11 @@ describe('MavenHelper', function() {
                 { url: 'http://localhost:9191/maven-package-samples/sample1', version: '1.0.0', files: ['file1.1.0.0', 'file2.1.0.0'] },
                 { url: 'http://localhost:9191/maven-package-samples/sample1', version: '2.0.0', files: ['file1.2.0.0', 'file2.2.0.0'] },
                 { url: 'maven3+http://localhost:9191/maven-package-samples/sample1', version: '1.0.0', files: ['file1.1.0.0', 'file2.1.0.0'] },
-                { url: 'maven3+http://localhost:9191/maven-package-samples/sample1', version: '2.0.0', files: ['file1.2.0.0', 'file2.2.0.0'] }
+                { url: 'maven3+http://localhost:9191/maven-package-samples/sample1', version: '2.0.0', files: ['file1.2.0.0', 'file2.2.0.0'] },
+                { url: 'http://localhost:9191/maven-package-samples/sample3', version: '1.0.0', files: ['file1.1.0.0', 'file2.1.0.0'] },
+                { url: 'http://localhost:9191/maven-package-samples/sample3', version: '2.0.0', files: ['file1.2.0.0', 'file2.2.0.0'] },
+                { url: 'maven3+http://localhost:9191/maven-package-samples/sample3', version: '1.0.0', files: ['file1.1.0.0', 'file2.1.0.0'] },
+                { url: 'maven3+http://localhost:9191/maven-package-samples/sample3', version: '2.0.0', files: ['file1.2.0.0', 'file2.2.0.0'] }            
             ];
             for (var i=0; i<metadataTests.length; i++) {
                 let oTest = metadataTests[i];

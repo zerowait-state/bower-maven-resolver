@@ -4,13 +4,16 @@ var fs = require('fs');
 var os = require('os');
 var requestPromise = require('request-promise-native');
 var request = require('request');
-var targz = require('tar.gz');
 var tmp = require('tmp');
 var util = require('util');
 var xml2js = require('xml2js');
+var tar = require('tar');
+var zlib = require('zlib');
+var unzipstream = require('unzip-stream');
 
 const MAVEN_METADATA_FILENAME = 'maven-metadata.xml';
 const MAVEN_ARTIFACT_FORMAT = '%s/%s-%s.tar.gz';
+const MAVEN_ARTIFACT_ZIP_FORMAT = '%s/%s-%s.zip';
 
 var _public = {}; // will be exported
 var _private = {}; // will only be visible within the module
@@ -58,7 +61,9 @@ _public.getVersionsFromMavenMetadataXml = function(sXmlString) {
 _public.downloadAndUnpackPackage = function(bower, source, target) {
     var opts = _private.getAuthOption(bower, source);
     var sRequestUrl = _private.getPackageUrl(source, target);
-    return _private.unpackRemotePackageViaPromise(sRequestUrl, opts);
+    var sRequestZipUrl = _private.getPackageUrl(source, target,'zip');
+    var promise= _private.unpackRemotePackageViaPromise([sRequestUrl,sRequestZipUrl], opts);
+    return promise;
 };
 
 /**
@@ -146,22 +151,47 @@ _private.slurpUrlViaPromise = function(sUrl, options) {
 /**
  * Writes content of URL to a temporary directory (which will be created), and
  * returns the path to the directory via a promise which is fulfilled when the
- * process is completed.
- * @param {String} sUrl
+ * process is completed.  First attempts to locate an archive in .tar.gz format,
+ * and if this fails attempt to locate an archive in .zip format before giving up
+ * @param {String} sUrls
  * @param {object} options
  * @return {Promise} returning directory the package was unpacked to
  */
-_private.unpackRemotePackageViaPromise = function(sUrl, options) {
-    var tmpDir = tmp.dirSync().name;
+_private.unpackRemotePackageViaPromise = function(sUrls, options) {
+    var tgzTmpDir = tmp.dirSync().name;
+    var zipTmpDir = tmp.dirSync().name;
+    var statusCode=-1;
+    var sUrl=sUrls[0];
+    var sZipUrl=sUrls[1];
+    
+    var zipPromiseFactory = function() {
+        return new Promise(function(resolve, reject) {
+            var readStream = request.get(sZipUrl, options);
+            readStream.
+                    on('error', error => {reject(error);}).
+                    pipe(unzipstream.Extract({ path: zipTmpDir })).
+                    on('error', error => {reject(error);}).
+                    on('close', function() {resolve();});
+        });
+    }
+    
     var promise = new Promise(function(resolve, reject) {
         var readStream = request.get(sUrl, options);
-        var writeStream = targz().createWriteStream(tmpDir);
-        readStream.on('error', error => {reject(error);});
-        writeStream.on('error', error => {reject(error);});
-        writeStream.on('end', function() {resolve();});
-        readStream.pipe(writeStream);
+        
+        readStream.
+                on('response', function(response) {
+                    statusCode=response.statusCode;
+                }).
+                on('error', error => {reject(error);}).
+                pipe(zlib.createGunzip()).
+                on('error', error => {reject(error);}).
+                pipe(tar.x({C:tgzTmpDir})).
+                on('error', error => {reject(error);}).
+                on('end', function() { resolve(); });
     });
-    return promise.then(function() { return tmpDir; });
+    
+    var result = promise.then(function() { return tgzTmpDir; },function(error) { return zipPromiseFactory().then(function() {return zipTmpDir; }); });
+    return result;
 };
 
 /**
@@ -265,7 +295,7 @@ _private.getM2Dir = function() {
     return undefined;
 };
 
-_private.getPackageUrl = function(source, target) {
+_private.getPackageUrl = function(source, target, format) {
     var sRequestUrl = _private.getRequestUrl(source);
     sRequestUrl = sRequestUrl.replace(/\/+$/, '');
     var sTarget = target.replace(/^\/+/, '');
@@ -276,6 +306,10 @@ _private.getPackageUrl = function(source, target) {
     if (!aRes) {
         throw new Error('URL does not conform to standard: '+sRequestUrl);
     }
-    sRequestUrl = util.format(MAVEN_ARTIFACT_FORMAT, sRequestUrl, aRes[1], aRes[2]);
+    if (format=='zip') {
+        sRequestUrl = util.format(MAVEN_ARTIFACT_ZIP_FORMAT, sRequestUrl, aRes[1], aRes[2]);
+    } else {
+        sRequestUrl = util.format(MAVEN_ARTIFACT_FORMAT, sRequestUrl, aRes[1], aRes[2]);
+    }
     return sRequestUrl;
 };
