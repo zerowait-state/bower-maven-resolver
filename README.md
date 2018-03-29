@@ -48,7 +48,7 @@ All of the files of your Bower package are archived into a single file, for exam
   
   **Note:** you can probably also figure out a nifty way of getting your build process to create the dist.tar.gz file for you that will work across platforms.  The above gives you the idea how it should work.  Here is an [example using Grunt](doc/create-package-with-grunt.md).
 
-  **Note:** an easier and more integrated way to create your distribution file and deploy it into your Maven respository is to use the [grunt-maven-tasks](https://github.com/smh/grunt-maven-tasks) plugin.  The following [example](doc/create-package-with-grunt-maven-tasks.md). provides a Gruntfile.js excerpt showing how to generate a .tar.gz and .zip distribution using this plugin.
+  **Note:** an easier and more integrated way to create your distribution file and deploy it into your Maven respository is to use the [grunt-maven-tasks](https://github.com/smh/grunt-maven-tasks) plugin.  The following [example](doc/create-package-with-grunt-maven-tasks.md) provides a Gruntfile.js excerpt showing how to generate a .tar.gz and .zip distribution using this plugin.
 
 * [Deploy](https://maven.apache.org/plugins/maven-deploy-plugin/deploy-file-mojo.html) the archive file into maven repository
 

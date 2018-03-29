@@ -104,4 +104,4 @@ Now you can generate the package and deploy it to your Maven repository as follo
 grunt copy deploy
 ```
 
-That's it!  You should now have an artifact named '<package.name>-<package.version>.targz' generated in your project folder and  deployed to the Maven repository.
+That's it!  You should now have an artifact named '<package.name>-<package.version>.tar.gz' generated in your project folder and  deployed to the Maven repository.
