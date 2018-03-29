@@ -34,7 +34,7 @@ Published under the Apache License 2.0.
 
 ## Publishing
 
-All of the files of your Bower package are archived into a single file, for example dist.tar.gz, and published into the maven repository (Nexus, Artifactory, etc).  The format of the file that is uploaded to the repository must a gzipped tar package.  This file is then publised under a desired group ID, artifact ID, and version as any maven artifact would be.
+All of the files of your Bower package are archived into a single file, for example dist.tar.gz, and published into the maven repository (Nexus, Artifactory, etc).  The format of the file that is uploaded to the repository must be either a gzipped tar package with a .tar.gz suffix or a zip file with a .zip suffix.  This file is then published under a desired group ID, artifact ID, and version as any maven artifact would be.
 
 * Generate package of your project.  Following is an example of creating this file assuming your build process puts files into a dist/ subdirectory in your project.
 
@@ -44,9 +44,11 @@ All of the files of your Bower package are archived into a single file, for exam
   tar cvfz dist.tar.gz .
   ```
   
-  **Note:** it is recommended **NOT** to name your package file 'package.tar.gz' so that, while cleaning up, you do not accidentally delete your package.json file.
+  **Note:** it is recommended **NOT** to name your package file 'package.tar.gz' or 'package.zip' so that, while cleaning up, you do not accidentally delete your package.json file.
   
   **Note:** you can probably also figure out a nifty way of getting your build process to create the dist.tar.gz file for you that will work across platforms.  The above gives you the idea how it should work.  Here is an [example using Grunt](doc/create-package-with-grunt.md).
+
+  **Note:** an easier and more integrated way to create your distribution file and deploy it into your Maven respository is to use the [grunt-maven-tasks](https://github.com/smh/grunt-maven-tasks) plugin.  The following [example](doc/create-package-with-grunt-maven-tasks.md). provides a Gruntfile.js excerpt showing how to generate a .tar.gz and .zip distribution using this plugin.
 
 * [Deploy](https://maven.apache.org/plugins/maven-deploy-plugin/deploy-file-mojo.html) the archive file into maven repository
 
@@ -58,7 +60,7 @@ All of the files of your Bower package are archived into a single file, for exam
      -DrepositoryId=MY_REPO
    ```
 
-  Presumably you're using maven and know how to get artifacts into it.  You could use the command line given here, or deploy manually with the web client for your repository.  For the short term, I use a [quick and dirty shell script](doc/sample-shell-deploy.md) for this.
+  Presumably you're using maven and know how to get artifacts into it.  You could use the command line given here, or deploy manually with the web client for your repository.  For the short term, I use a [quick and dirty shell script](doc/sample-shell-deploy.md) for this.  Or use the [grunt-maven-tasks](https://github.com/smh/grunt-maven-tasks) plugin as shown in this [example](doc/create-package-with-grunt-maven-tasks.md).
 
 ## Accessing your Package with Bower
 
